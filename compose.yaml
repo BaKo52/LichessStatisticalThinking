@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-projet
+    environment:
+      POSTGRES_DB: lichess
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+  web:
+    build: /test_project_docker/.
+    ports:
+      - "3000:3000"
+
+  etl:
+    build: /etl/.
+
+volumes:
+  postgres_data:
